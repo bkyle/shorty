@@ -1,0 +1,27 @@
+#!/usr/bin/python
+#
+# shorty
+#
+# Shortens URLs to a distinct string
+
+alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+-"
+
+def checksum(url):
+    r = 7
+    for c in url:
+        r += ord(c)
+        r << 3
+    return r
+
+def shorten(url):
+    r = ""
+    c = checksum(url)
+    while c > 0:
+        x = c & 0x3f
+        c = c >> 6
+        r += alphabet[x]
+    return r
+
+if (__name__ == '__main__'):
+    import sys
+    print shorten(sys.argv[1])
